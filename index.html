@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Portfolio</title>
+</head>
+<script defer src="script.js"></script>
+<body style="background-color: #007d7b;">
+    <button class="desktop-icons draggable-button" style="top: 20px; left: 20px"><img src="assets/start.png" alt="Start Button Icon"><p class="desktop-icon-text">Icon 1</p></button>
+    <button class="desktop-icons draggable-button" style="top: 120px; left: 20px"><img src="assets/start.png" alt="Start Button Icon"><p class="desktop-icon-text">Icon 2</p></button>
+    <button class="desktop-icons draggable-button" style="top: 220px; left: 20px"><img src="assets/start.png" alt="Start Button Icon"><p class="desktop-icon-text">Icon 3</p></button>
+    <div class="taskbar">
+        <div class="left-buttons">
+            <button id="start-button" class="taskbar-buttons"><img src="assets/start.png" alt="Start Button Icon"><h3>Start</h3></button>
+        </div>
+        <div class="right-buttons">
+            <button id="time" class="taskbar-buttons"></button>
+        </div>
+    </div>
+    <div id="start-menu">
+        <button id="programs" class="expandable-button">Programs ></button>
+        <button id="run">Run</button>
+        <button id="logoff">Log Off</button>
+        <button id="shutdown">Shutdown</button>
+    </div>
+    <div id="right-click-menu">
+        <button disabled id="view">View</button>
+        <button disabled id="sort-by">Sort By</button>
+        <button id="refresh">Refresh</button>
+    </div>
+</body>
+
+</html>
+

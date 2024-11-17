@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: 1px solid red; */
+}
+
+.taskbar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #c0c0c0;
+    z-index: 100;
+}
+
+.taskbar-buttons {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: #c0c0c0;
+    width: 100%;
+    height: 100%;
+    margin: 1px;
+    padding: 0px 3px 0px 3px;
+}
+
+#time {
+    border: inset;
+    border-color: #dddddd;
+    margin: 1px;
+}
+
+#start-button {
+    border-color: #dddddd;
+}
+
+#start-button:hover {
+    border-color: #acacac;
+}
+
+.draggable-button {
+    /* cursor: move; */
+    position: absolute;
+}
+
+
+.desktop-icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    padding: 4px 10px 4px 10px;
+}
+
+.desktop-icons:hover, .desktop-icons:focus {
+    background-color: #f0f0f01e;
+    border: 1px solid #c0c0c033;
+    padding: 3px 9px 3px 9px;
+}
+
+.desktop-icon-text {
+    color: rgba(255, 255, 255, 0.884);
+    text-align: center;
+}
+
+
+#start-menu, #right-click-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #c0c0c0;
+    margin: auto;
+    position: absolute;
+}
+
+#start-menu {
+    bottom: 38px;
+}
+
+#start-menu.show, #right-click-menu.show {
+    display: flex;
+}
+
+#start-menu button, #right-click-menu button {
+    margin: 0;
+    background-color: #c0c0c0;
+    border: none;
+    padding: 10px 30px 10px 20px;   
+}
+
+#start-menu button:hover, #right-click-menu button:hover {
+    background-color: #a1a1a1;
+}
