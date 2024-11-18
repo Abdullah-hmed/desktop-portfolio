@@ -180,15 +180,15 @@ const taskBar = document.getElementById('taskbar');
 
 refreshButton.addEventListener('click', () => {
     location.reload();
+    rightClickMenu.classList.remove('show');
 });
 
 sortBy.addEventListener('click', () => {
     windowContainer.forEach((window) => {
         window.remove();
     })
-    // taskBar.remove();
     resetIcons(desktopIcons);
-    // assignListeners(desktopIcons);
+    rightClickMenu.classList.remove('show');
 });
 
 startButton.addEventListener('click', () => {
