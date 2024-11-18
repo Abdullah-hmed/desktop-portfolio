@@ -9,39 +9,53 @@ setInterval(updateTime, 1000);
 
 // Draggable functionality
 function dragElement(elmnts) {
-
     if (!(elmnts instanceof NodeList) && !(elmnts instanceof Array)) {
         elmnts = [elmnts];
     }
-
     elmnts.forEach(elmnt => {
-        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;   
         elmnt.onmousedown = function(e) {
-            
             e.preventDefault();
-            
             pos3 = e.clientX;
             pos4 = e.clientY;
-            
             document.onmouseup = function(e) {                
                 document.onmouseup = null;
                 document.onmousemove = null;
             };
-            
             document.onmousemove = function(e) {
                 e.preventDefault();
-                
                 pos1 = pos3 - e.clientX;
                 pos2 = pos4 - e.clientY;
                 pos3 = e.clientX;
                 pos4 = e.clientY;
-                
                 elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
                 elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
             };
         }; 
     });
+}
+
+function dragWindow(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    const topBar = elmnt.querySelector('.top-bar');
+    topBar.onmousedown = function(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = function(e) {                
+            document.onmouseup = null;
+            document.onmousemove = null;
+        };
+        document.onmousemove = function(e) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        };
+    };
 }
 
 function assignListeners(desktopIcons) {
@@ -136,7 +150,6 @@ function createWindowElement(title) {
     windowDiv.appendChild(topBar);
     windowDiv.appendChild(windowContent);
     
-    dragElement(windowDiv);
     onFocusWindow(windowDiv, taskbarButton);
 
     closeButton.addEventListener('click', ()=> {
@@ -144,6 +157,7 @@ function createWindowElement(title) {
         taskbarButton.remove();
     })
 
+    dragWindow(windowDiv);
     
     return windowDiv;
 }
@@ -235,7 +249,6 @@ document.addEventListener('contextmenu', (event) => {
 
 
 dragElement(desktopIcons);
-dragElement(windowContainer);
 
 assignListeners(desktopIcons);
 
