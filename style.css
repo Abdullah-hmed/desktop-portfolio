@@ -5,7 +5,7 @@
     /* outline: 1px solid red; */
 }
 
-.taskbar {
+#taskbar {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
@@ -15,6 +15,14 @@
     right: 0;
     background-color: #c0c0c0;
     z-index: 100;
+}
+
+#window-buttons {
+    display: flex;
+}
+
+#left-buttons {
+    display: flex;
 }
 
 .taskbar-buttons {
@@ -27,6 +35,7 @@
     height: 100%;
     margin: 1px;
     padding: 0px 3px 0px 3px;
+    border-color: #dddddd;
 }
 
 #time {
@@ -36,7 +45,17 @@
 }
 
 #start-button {
+    max-width: 80px;
+}
+
+#start-button {
+    box-sizing: border-box;
     border-color: #dddddd;
+}
+
+
+.active {
+    border-style: inset;
 }
 
 #start-button:hover {
@@ -58,6 +77,8 @@
     background-color: transparent;
     border: none;
     padding: 4px 10px 4px 10px;
+    min-width: 68px;
+    
 }
 
 .desktop-icons:hover, .desktop-icons:focus {
@@ -72,29 +93,70 @@
 }
 
 
-#start-menu, #right-click-menu {
+#start-menu, #right-click-menu, #right-click-icon-menu {
     display: none;
     flex-direction: column;
     background-color: #c0c0c0;
     margin: auto;
     position: absolute;
-}
+    z-index: 90;
+    filter: drop-shadow(2px 2px 2px #5a5a5a);}
 
 #start-menu {
     bottom: 38px;
 }
 
-#start-menu.show, #right-click-menu.show {
+#start-menu.show, #right-click-menu.show, #right-click-icon-menu.show {
     display: flex;
 }
 
-#start-menu button, #right-click-menu button {
+#start-menu button, #right-click-menu button, #right-click-icon-menu button {
     margin: 0;
     background-color: #c0c0c0;
     border: none;
-    padding: 10px 30px 10px 20px;   
+    padding: 10px 30px 10px 20px;
 }
 
 #start-menu button:hover, #right-click-menu button:hover {
+    background-color: #000080;
+    color: whitesmoke;
+}
+
+.window {
+    /* display: none; */
     background-color: #a1a1a1;
+    width: 400px;
+    height: 400px;
+    border-style: outset;
+
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.top-bar {
+    display: flex;
+    width: 100%;
+    color: whitesmoke;
+    justify-content: space-between;
+    background-image: linear-gradient(to right, #000080, #1085d2);
+}
+
+.top-bar-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-bar-right button {
+    min-width: 17px;
+    max-height: 17px;
+    background-color: #c0c0c0;
+    text-align: center; 
+} 
+
+.top-bar-right button:last-child {
+    margin-right: 2px;
 }
