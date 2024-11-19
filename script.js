@@ -1,6 +1,15 @@
+let openWindows = [];
+
 function updateTime() {
     const now = new Date();
     document.getElementById('time').textContent = now.toLocaleTimeString();
+}
+
+function removeWindowFromList(windowTitle) {
+    const index = openWindows.indexOf(windowTitle);
+    if (index !== -1) {
+        openWindows.splice(index, 1);
+    }
 }
 
 // Update time immediately and every second
@@ -62,9 +71,14 @@ function assignListeners(desktopIcons) {
     desktopIcons.forEach((desktopIcon) => {
         desktopIcon.addEventListener('dblclick', () => {
             const iconName = desktopIcon.querySelector('.desktop-icon-text').textContent;
+            if(openWindows.includes(iconName)) {
+                console.log(iconName + ' is already open');
+                return;
+            }
             const newWindow = createWindowElement(iconName);
             document.body.appendChild(newWindow);
-
+            openWindows.push(iconName);
+            console.log(openWindows);
         })
         desktopIcon.addEventListener('contextmenu', (event)=> {
             event.preventDefault();
@@ -198,6 +212,8 @@ function createWindowElement(title) {
     closeButton.addEventListener('click', ()=> {
         windowDiv.remove();
         taskbarButton.remove();
+        removeWindowFromList(title);
+        console.log(openWindows);
     })
 
     dragWindow(windowDiv);
