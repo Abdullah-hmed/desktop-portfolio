@@ -174,7 +174,7 @@ function createWindowElement(title) {
     })
 
     dragWindow(windowDiv);
-    
+    loadContent(windowDiv, `files/${title}.html`);
     return windowDiv;
 }
 
@@ -194,6 +194,24 @@ function onFocusWindow(windowDiv, taskbarButton) {
         }
     });
 }
+
+async function loadContent(windowDiv, fileName) {
+    try {
+        const response = await fetch(fileName);
+        
+        if(!response.ok){
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const content = await response.text();
+        windowDiv.querySelector('#window-content').innerHTML = content;
+
+    } catch (error) {
+        throw new Error(error);
+        windowDiv.querySelector('#window-content').innerHTML = `<p>Error: ${error.message}</p>`;
+    }
+}
+
 
 const startButton = document.getElementById('start-button');
 const shutdownButton = document.getElementById('shutdown');
