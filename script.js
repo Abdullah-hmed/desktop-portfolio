@@ -126,6 +126,10 @@ function createWindowElement(title) {
 
     const titleParagraph = document.createElement('p');
     titleParagraph.textContent = title || 'Window Title';
+    titleParagraph.style.paddingLeft = '3px';
+    titleParagraph.style.fontFamily = 'WindowsFont, sans-serif';
+    titleParagraph.style.fontSize = 'larger';
+    titleParagraph.style.userSelect = 'none';
     topBarLeft.appendChild(titleParagraph);
 
     // Create top bar right
@@ -134,12 +138,22 @@ function createWindowElement(title) {
 
     const minimizeButton = document.createElement('button');
     minimizeButton.textContent = '-';
+    // minimizeButton.innerHTML = '<b>_</b>';
+    minimizeButton.innerHTML = '<i class="fa fa-lg side fa-minus" style="margin-top: 7px"></i>';
+    minimizeButton.style.fontFamily = 'WindowsFont, sans-serif';
+    minimizeButton.id  = 'minimize-button';
 
     const maximizeButton = document.createElement('button');
-    maximizeButton.textContent = 'O';
+    // maximizeButton.textContent = '🗖';
+    maximizeButton.innerHTML = '<i class="fa fa-window-maximize"></i>';
+    maximizeButton.style.fontFamily = 'WindowsFont, sans-serif';
+    maximizeButton.id  = 'maximize-button';
 
     const closeButton = document.createElement('button');
-    closeButton.textContent = 'X';
+    // closeButton.textContent = 'X';
+    closeButton.innerHTML = '<i class="fa fa-lg fa-times"></i>';
+    closeButton.style.fontFamily = 'WindowsFont, sans-serif';
+    closeButton.id = 'close-button';
 
     // Add window icon
     const taskbarButton = document.createElement('button');
