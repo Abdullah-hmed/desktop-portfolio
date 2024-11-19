@@ -15,7 +15,9 @@
     left: 0;
     right: 0;
     background-color: #c0c0c0;
+    border-top: #fafafa solid 2px;
     z-index: 100;
+    user-select: none;
 }
 
 #window-buttons {
@@ -55,7 +57,7 @@
 }
 
 
-.active {
+.active, .taskbar-buttons button.active {
     border-style: inset;
 }
 
@@ -111,6 +113,10 @@
     display: flex;
 }
 
+.minimized {
+    display: none;
+}
+
 #start-menu button, #right-click-menu button, #right-click-icon-menu button {
     margin: 0;
     background-color: #c0c0c0;
@@ -126,8 +132,8 @@
 .window {
     /* display: none; */
     background-color: #a1a1a1;
-    width: 400px;
-    height: 400px;
+    width: 800px;
+    height: 600px;
     border-style: outset;
 
 

@@ -182,6 +182,19 @@ function createWindowElement(title) {
     
     onFocusWindow(windowDiv, taskbarButton);
 
+    taskbarButton.addEventListener('click', (e) => {   
+        e.stopPropagation();
+        windowDiv.classList.toggle('minimized');
+        taskbarButton.classList.add('active');
+        windowDiv.focus();
+    });
+
+    minimizeButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        windowDiv.classList.add('minimized');
+        taskbarButton.classList.remove('active');
+    });
+
     closeButton.addEventListener('click', ()=> {
         windowDiv.remove();
         taskbarButton.remove();
@@ -202,6 +215,7 @@ function onFocusWindow(windowDiv, taskbarButton) {
     windowDiv.addEventListener('blur', () => {
         taskbarButton.classList.remove('active');
     });
+    
     document.addEventListener('click', (event) => {
         if(!windowDiv.contains(event.target)) {
             taskbarButton.classList.remove('active');
