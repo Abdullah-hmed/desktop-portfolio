@@ -160,3 +160,27 @@
 .top-bar-right button:last-child {
     margin-right: 2px;
 }
+
+.overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    /* opacity: 0.5; */
+    z-index: 1000;
+    animation: fade-in 0.5s ease-in;
+}
+
+@keyframes fade-in {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@keyframes fade-out {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}

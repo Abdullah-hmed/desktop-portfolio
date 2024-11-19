@@ -83,6 +83,22 @@ function resetIcons(desktopIcons) {
     });
 }
 
+function logOffOverlay() {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.style.transition = 'opacity 0.5s ease-in-out';
+    document.body.appendChild(overlay);
+    
+
+    overlay.addEventListener('click', () => {
+        overlay.style.animation = 'fade-out 0.5s ease-in-out';
+        overlay.style.opacity = 0;
+        overlay.addEventListener('animationend', () => {
+            overlay.remove();
+        });
+    });
+}
+
 function toggleStartButton() {
     const startMenu = document.getElementById('start-menu');
     startMenu.classList.toggle('show');
@@ -189,6 +205,8 @@ const rightClickIcon = document.getElementById('right-click-icon-menu');
 const refreshButton = document.getElementById('refresh');
 const sortBy = document.getElementById('sort-by');
 
+const logOff = document.getElementById('logoff');
+
 const windowContainer = document.querySelectorAll('.window');
 const taskBar = document.getElementById('taskbar');
 
@@ -209,6 +227,10 @@ startButton.addEventListener('click', () => {
     toggleStartButton();
     startButton.classList.toggle('active');
 });
+
+logOff.addEventListener('click', () => {
+    logOffOverlay();
+})
 
 shutdownButton.addEventListener('click', () => {
     if (confirm('Are you sure you want to shutdown?')) {
