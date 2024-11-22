@@ -90,11 +90,12 @@ function assignListeners(desktopIcons) {
 
 function openIcon(desktopIcon) {
     const iconName = desktopIcon.querySelector('.desktop-icon-text').textContent;
+    const imgAddress = desktopIcon.querySelector('img').src;
     if(openWindows.includes(iconName)) {
         console.log(iconName + ' is already open');
         return;
     }
-    const newWindow = createWindowElement(iconName);
+    const newWindow = createWindowElement(iconName, imgAddress);
     document.body.appendChild(newWindow);
     openWindows.push(iconName);
     console.log(openWindows);
@@ -136,7 +137,7 @@ function toggleRightClickMenu(rightClickMenu, posX, posY) {
     rightClickMenu.style.top = `${posY}px`;
 }
 
-function createWindowElement(title) {
+function createWindowElement(title, imgAddress) {
     // Create main window div
     const windowDiv = document.createElement('div');
     windowDiv.className = 'window';
@@ -147,8 +148,8 @@ function createWindowElement(title) {
         windowDiv.style.height = '50%';
     } else {
         // Redefine this when you want custom sized windows
-        windowDiv.style.width = '300px';
-        windowDiv.style.height = '300px';
+        windowDiv.style.width = '600px';
+        windowDiv.style.height = '400px';
     }
 
     // Create top bar
@@ -158,6 +159,15 @@ function createWindowElement(title) {
     // Create top bar left
     const topBarLeft = document.createElement('div');
     topBarLeft.className = 'top-bar-left';
+    topBarLeft.style.marginLeft = '3px';
+    topBarLeft.style.display = 'flex';
+    topBarLeft.style.alignItems = 'center';
+
+    const titleImage = document.createElement('img');
+    titleImage.src = imgAddress;
+    titleImage.style.width = '15px';
+    titleImage.style.height = '15px';
+    topBarLeft.appendChild(titleImage);
 
     const titleParagraph = document.createElement('p');
     titleParagraph.textContent = title || 'Window Title';
@@ -166,6 +176,8 @@ function createWindowElement(title) {
     titleParagraph.style.fontSize = 'larger';
     titleParagraph.style.userSelect = 'none';
     topBarLeft.appendChild(titleParagraph);
+
+    
 
     // Create top bar right
     const topBarRight = document.createElement('div');

@@ -156,7 +156,39 @@ body::before {
     margin: auto;
     position: absolute;
     z-index: 90;
-    filter: drop-shadow(2px 2px 2px #5a5a5a);}
+    filter: drop-shadow(2px 2px 2px #5a5a5a);
+    
+}
+
+#right-click-menu, #right-click-icon-menu {
+    animation: rightClickMenu 0.1s ease-in forwards;
+}
+
+@keyframes rightClickMenu {
+    0% {
+        transform-origin: top left;
+        transform: scale(0);
+    }
+    100% {
+        transform-origin: top left;
+        transform: scale(1);
+    }
+}
+
+#start-menu {
+    animation: startMenu 0.1s ease-in forwards;
+}
+
+@keyframes startMenu {
+    0% {
+        transform-origin: bottom left;
+        transform: scale(0);
+    }
+    100% {
+        transform-origin: bottom left;
+        transform: scale(1);
+    }
+}
 
 #start-menu {
     bottom: 38px;
