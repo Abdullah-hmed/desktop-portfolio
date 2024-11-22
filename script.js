@@ -1,4 +1,5 @@
 let openWindows = [];
+const isTouchDevice = 'ontouchstart' in window || navigator.msMaxTouchPoints > 0;
 
 function updateTime() {
     const now = new Date();
@@ -69,23 +70,34 @@ function dragWindow(elmnt) {
 
 function assignListeners(desktopIcons) {
     desktopIcons.forEach((desktopIcon) => {
-        desktopIcon.addEventListener('dblclick', () => {
-            const iconName = desktopIcon.querySelector('.desktop-icon-text').textContent;
-            if(openWindows.includes(iconName)) {
-                console.log(iconName + ' is already open');
-                return;
-            }
-            const newWindow = createWindowElement(iconName);
-            document.body.appendChild(newWindow);
-            openWindows.push(iconName);
-            console.log(openWindows);
-        })
+        if(isTouchDevice) {
+            desktopIcon.addEventListener('touchend', () => {
+                openIcon(desktopIcon);   
+            });    
+        } else {
+            desktopIcon.addEventListener('dblclick', () => {
+                openIcon(desktopIcon);   
+            });
+        }
+        
         desktopIcon.addEventListener('contextmenu', (event)=> {
             event.preventDefault();
             toggleRightClickMenu(rightClickIcon, event.clientX, event.clientY);
             
         })
     })
+}
+
+function openIcon(desktopIcon) {
+    const iconName = desktopIcon.querySelector('.desktop-icon-text').textContent;
+    if(openWindows.includes(iconName)) {
+        console.log(iconName + ' is already open');
+        return;
+    }
+    const newWindow = createWindowElement(iconName);
+    document.body.appendChild(newWindow);
+    openWindows.push(iconName);
+    console.log(openWindows);
 }
 
 function resetIcons(desktopIcons) {
@@ -129,6 +141,15 @@ function createWindowElement(title) {
     const windowDiv = document.createElement('div');
     windowDiv.className = 'window';
     windowDiv.setAttribute('tabindex', '0');
+    windowDiv.style.zIndex = 100;
+    if(isTouchDevice) {
+        windowDiv.style.width = '50%';
+        windowDiv.style.height = '50%';
+    } else {
+        // Redefine this when you want custom sized windows
+        windowDiv.style.width = '300px';
+        windowDiv.style.height = '300px';
+    }
 
     // Create top bar
     const topBar = document.createElement('div');

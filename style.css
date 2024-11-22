@@ -6,6 +6,55 @@
     /* outline: 1px solid red; */
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.3) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+    mix-blend-mode: overlay;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.1),
+            rgba(0, 255, 0, 0.1) 50%,
+            rgba(0, 0, 255, 0.1) 100%
+        );
+    opacity: 0.2;
+    mix-blend-mode: color-dodge;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.8; }
+}
+
+body::before {
+    animation: flicker 5s infinite;
+}
+
 #taskbar {
     display: flex;
     justify-content: space-between;
@@ -132,11 +181,10 @@
 .window {
     /* display: none; */
     background-color: #a1a1a1;
-    width: 800px;
-    height: 600px;
+    /* width: 800px;
+    height: 600px; */
     border-style: outset;
-
-
+    overflow: hidden;
     position: absolute;
     top: 50%;
     left: 50%;
