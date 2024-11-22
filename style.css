@@ -65,7 +65,7 @@ body::before {
     right: 0;
     background-color: #c0c0c0;
     border-top: #fafafa solid 2px;
-    z-index: 100;
+    z-index: 900;
     user-select: none;
 }
 
@@ -164,6 +164,13 @@ body::before {
 
 .minimized {
     display: none;
+}
+
+.maximized {
+    /* top: 0px !important; */
+    bottom: 40px !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 #start-menu button, #right-click-menu button, #right-click-icon-menu button {

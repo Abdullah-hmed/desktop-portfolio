@@ -230,6 +230,11 @@ function createWindowElement(title) {
         taskbarButton.classList.remove('active');
     });
 
+    maximizeButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        windowDiv.classList.toggle('maximized');
+    })
+
     closeButton.addEventListener('click', ()=> {
         windowDiv.remove();
         taskbarButton.remove();
