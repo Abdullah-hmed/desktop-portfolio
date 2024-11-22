@@ -170,8 +170,10 @@ body::before {
     display: none;
 }
 
-.maximized {
-    /* top: 0px !important; */
+.window.maximized {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
     bottom: 40px !important;
     width: 100% !important;
     height: 100% !important;

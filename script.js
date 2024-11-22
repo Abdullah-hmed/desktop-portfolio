@@ -235,6 +235,11 @@ function createWindowElement(title) {
         windowDiv.classList.toggle('maximized');
     })
 
+    topBar.addEventListener('dblclick', (e) => {
+        e.stopPropagation();
+        windowDiv.classList.toggle('maximized');
+    })
+
     closeButton.addEventListener('click', ()=> {
         windowDiv.remove();
         taskbarButton.remove();
