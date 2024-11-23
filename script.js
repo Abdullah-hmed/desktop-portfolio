@@ -222,6 +222,11 @@ function createWindowElement(title, imgAddress) {
     // Create content area
     const windowContent = document.createElement('div');
     windowContent.id = 'window-content';
+    windowContent.style.overflowY = 'auto';
+    windowContent.style.maxHeight = '100%';
+    if(windowDiv.classList.contains('maximized')) {
+        windowContent.style.paddingBottom = '40px';
+    }
 
     // Assemble the window
     windowDiv.appendChild(topBar);

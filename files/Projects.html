@@ -1,11 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programs</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starred GitHub Projects</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    #projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .project {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      
+    }
+
+    .project img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .project p {
+      text-align: center;
+    }
+
+    
+    .container {
+      width: 90%;
+      margin: auto;
+      max-width: 800px;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <p>Hi</p>
+  <div class="container">
+    <h1>My GitHub Projects</h1>
+    <div id="projects">
+      <a class="project" href="https://github.com/Abdullah-hmed/Morphosis" 
+      title="Morphosis is a web application designed for performing edits to faces, utilizing StyleGAN2 and Pixel2Style2Pixel" target="_blank">
+        <img src="assets/github-mark-white.png" alt="Github Logo">
+        <p>Morphosis</p>
+      </a>
+      <a class="project" href="https://github.com/Abdullah-hmed/MNIST-CNN-Model"
+      title="Trained a model for identifying handwritten letters using the MNIST dataset." target="_blank">
+        <img src="assets/github-mark-white.png" alt="Github Logo">
+        <p>MNIST-CNN-Model</p>
+      </a>
+      <a class="project" href="https://github.com/Abdullah-hmed/SL-WebApp-Main"
+      title="WebApp for Sign Language Alphabet Recognition" target="_blank">
+        <img src="assets/github-mark-white.png" alt="Github Logo">
+        <p>SL-WebApp-Main</p>
+      </a>
+      <a class="project" href="https://github.com/Abdullah-hmed/youtube-clone"
+      title="An attempt at making a Youtube homepage clone using HTML, CSS, JS and PHP" target="_blank">
+        <img src="assets/github-mark-white.png" alt="Github Logo">
+        <p>youtube-clone</p>
+      </a>
+      <a class="project" href="https://github.com/Abdullah-hmed/BookStore-Management-System"
+      title="A Book Store Management System built in Java" target="_blank">
+        <img src="assets/github-mark-white.png" alt="Github Logo">
+        <p>BookStore-Management-System</p>
+      </a>
+      <a class="project" href="https://github.com/Abdullah-hmed/Bank-Application"
+      title="Bank Application made in java." target="_blank">
+        <img src="assets/github-mark-white.png" alt="Github Logo">
+        <p>Bank-Application</p>
+      </a>
+      <a class="project" href="https://github.com/Abdullah-hmed/Frequency-Analysis"
+      title="Tool written in java to calculate frequency of letters in a given cipher." target="_blank">
+        <img src="assets/github-mark-white.png" alt="Github Logo">
+        <p>Frequency-Analysis</p>
+      </a>
+      <a class="project" href="https://github.com/Abdullah-hmed/Phone-Directory"
+      title="A phone directory made in Java." target="_blank">
+        <img src="assets/github-mark-white.png" alt="Github Logo">
+        <p>Phone-Directory</p>
+      </a>
+    </div>
+  </div>
 </body>
 </html>
