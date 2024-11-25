@@ -206,6 +206,10 @@ function createWindowElement(title, imgAddress) {
     const taskbarButton = document.createElement('button');
     taskbarButton.textContent = title;
     taskbarButton.classList.add('taskbar-buttons', 'active');
+    taskbarButton.style.paddingLeft = '15px';
+    taskbarButton.style.paddingRight = '15px';
+    taskbarButton.style.fontSize = '16px';
+    taskbarButton.style.maxHeight = '38px';
 
     const windowButtons = document.getElementById('window-buttons');
 

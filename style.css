@@ -10,6 +10,26 @@ body {
     overflow: hidden;
 }
 
+@media screen and (max-width: 600px) {
+    .overlaycrt {
+        display: none;
+    }
+}
+
+.overlaycrt {
+    position: absolute;
+    width: 132%;
+    height: 111%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+    z-index: 999999999;
+    opacity: 1;
+}
+
+
+
 body::before {
     content: "";
     position: fixed;
@@ -22,7 +42,7 @@ body::before {
     background: 
         repeating-linear-gradient(
             0deg,
-            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.836),
             rgba(0, 0, 0, 0.3) 1px,
             transparent 1px,
             transparent 3px
@@ -67,6 +87,7 @@ body::before {
     bottom: 0;
     left: 0;
     right: 0;
+    padding: 0px 5px 10px 2px;
     background-color: #c0c0c0;
     border-top: #fafafa solid 2px;
     z-index: 900;
@@ -92,6 +113,7 @@ body::before {
     margin: 1px;
     padding: 0px 3px 0px 3px;
     border-color: #dddddd;
+    white-space: nowrap;
 }
 
 #time {
@@ -191,7 +213,7 @@ body::before {
 }
 
 #start-menu {
-    bottom: 38px;
+    bottom: 48px;
 }
 
 #start-menu.show, #right-click-menu.show, #right-click-icon-menu.show {
