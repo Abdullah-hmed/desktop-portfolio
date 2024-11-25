@@ -26,6 +26,7 @@ body {
     pointer-events: none;
     z-index: 999999999;
     opacity: 1;
+    user-select: none;
 }
 
 
@@ -233,6 +234,10 @@ body::before {
     height: 100% !important;
 }
 
+.window.active {
+    z-index: 10;
+}
+
 #start-menu button, #right-click-menu button, #right-click-icon-menu button {
     margin: 0;
     background-color: #c0c0c0;
@@ -253,9 +258,10 @@ body::before {
     border-style: outset;
     overflow: hidden;
     position: absolute;
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
+    z-index: 1;
 }
 
 .top-bar {

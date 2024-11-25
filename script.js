@@ -140,17 +140,25 @@ function toggleRightClickMenu(rightClickMenu, posX, posY) {
 function createWindowElement(title, imgAddress) {
     // Create main window div
     const windowDiv = document.createElement('div');
-    windowDiv.className = 'window';
+    windowDiv.classList.add('window', 'active');
     windowDiv.setAttribute('tabindex', '0');
-    windowDiv.style.zIndex = 100;
+    var windowWidth = 600;
+    var windowHeight = 400;
+    var noOfWindowOpens = openWindows.length;
     if(isTouchDevice) {
         windowDiv.style.width = '50%';
         windowDiv.style.height = '50%';
     } else {
         // Redefine this when you want custom sized windows
-        windowDiv.style.width = '600px';
-        windowDiv.style.height = '400px';
+        windowDiv.style.width = windowWidth + 'px';
+        windowDiv.style.height = windowHeight + 'px';
     }
+
+    var x = window.innerWidth / 2;
+    var y = window.innerHeight / 2;
+
+    windowDiv.style.left = x - windowWidth / 2 + (noOfWindowOpens * -20) + 'px';
+    windowDiv.style.top = y - windowHeight / 2 + (noOfWindowOpens * 20) +'px';
 
     // Create top bar
     const topBar = document.createElement('div');
@@ -177,7 +185,6 @@ function createWindowElement(title, imgAddress) {
     titleParagraph.style.userSelect = 'none';
     topBarLeft.appendChild(titleParagraph);
 
-    
 
     // Create top bar right
     const topBarRight = document.createElement('div');
@@ -236,7 +243,6 @@ function createWindowElement(title, imgAddress) {
     windowDiv.appendChild(topBar);
     windowDiv.appendChild(windowContent);
     
-    onFocusWindow(windowDiv, taskbarButton);
 
     taskbarButton.addEventListener('click', (e) => {   
         e.stopPropagation();
@@ -267,21 +273,32 @@ function createWindowElement(title, imgAddress) {
         removeWindowFromList(title);
         console.log(openWindows);
     })
-
+    onFocusWindow(windowDiv, taskbarButton);
     dragWindow(windowDiv);
     loadContent(windowDiv, `files/${title}.html`);
     return windowDiv;
 }
 
 function onFocusWindow(windowDiv, taskbarButton) {
+
+            
     windowDiv.addEventListener('focusin', () => {
         taskbarButton.classList.add('active');
+
+        document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
+        windowDiv.classList.add('active')
     });
     windowDiv.addEventListener('click', () => {
         taskbarButton.classList.add('active');
+
+        document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
+        windowDiv.classList.add('active')
     });
     windowDiv.addEventListener('blur', () => {
         taskbarButton.classList.remove('active');
+
+        document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
+        windowDiv.classList.remove('active')
     });
     
     document.addEventListener('click', (event) => {
