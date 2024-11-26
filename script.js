@@ -101,20 +101,6 @@ function openIcon(desktopIcon) {
     console.log(openWindows);
 }
 
-function openURL(projectIcon, url) {
-    const iconName = projectIcon.querySelector('p').textContent;
-    const imgAddress = projectIcon.querySelector('img').src;
-    if(openWindows.includes(iconName)) {
-        console.log(iconName + ' is already open');
-        return;
-    }
-    const newWindow = createWindowElement(iconName, imgAddress, url);
-    loadURL(newWindow, url);
-    document.body.appendChild(newWindow);
-    openWindows.push(iconName);
-    console.log(openWindows);
-}
-
 function resetIcons(desktopIcons) {
     let top = 20;
     desktopIcons.forEach((desktopIcon, index) => {
@@ -151,7 +137,7 @@ function toggleRightClickMenu(rightClickMenu, posX, posY) {
     rightClickMenu.style.top = `${posY}px`;
 }
 
-function createWindowElement(title, imgAddress, url) {
+function createWindowElement(title, imgAddress) {
     // Create main window div
     const windowDiv = document.createElement('div');
     windowDiv.classList.add('window', 'active');
@@ -248,7 +234,7 @@ function createWindowElement(title, imgAddress, url) {
     const windowContent = document.createElement('div');
     windowContent.id = 'window-content';
     windowContent.style.overflowY = 'auto';
-    windowContent.style.height = '100vh';
+    windowContent.style.maxHeight = '100%';
     if(windowDiv.classList.contains('maximized')) {
         windowContent.style.paddingBottom = '40px';
     }
@@ -289,11 +275,7 @@ function createWindowElement(title, imgAddress, url) {
     })
     onFocusWindow(windowDiv, taskbarButton);
     dragWindow(windowDiv);
-
-    if(url === undefined) {
-        loadContent(windowDiv, `files/${title}.html`);
-    }
-
+    loadContent(windowDiv, `files/${title}.html`);
     return windowDiv;
 }
 
@@ -337,39 +319,16 @@ async function loadContent(windowDiv, fileName) {
         const content = await response.text();
         windowDiv.querySelector('#window-content').innerHTML = content;
 
-        if(fileName === 'files/Projects.html') {
-            const projectIcons = document.querySelectorAll('.project-icon');
-
-            projectIcons.forEach((projectIcon) => {
-                projectIcon.addEventListener('dblclick', () => {
-                    console.log('Hi');
-                    const imgAddress = projectIcon.querySelector('img').src;
-                    const title = projectIcon.querySelector('p').textContent;
-                    const url = projectIcon.getAttribute('data-url');
-                    openURL(projectIcon, url);
-                });
-            });
-        }
-
     } catch (error) {
         throw new Error(error);
         windowDiv.querySelector('#window-content').innerHTML = `<p>Error: ${error.message}</p>`;
     }
 }
 
-function loadURL(windowDiv, url) {
-    const iframe = document.createElement('iframe');
-    iframe.src = url;
-    iframe.style.width = '100%';
-    iframe.style.height = '100%';
-    windowDiv.querySelector('#window-content').appendChild(iframe);
-}
 
 const startButton = document.getElementById('start-button');
 const shutdownButton = document.getElementById('shutdown');
 const desktopIcons = document.querySelectorAll('.draggable-button');
-
-
 const startMenu = document.getElementById("start-menu");
 const rightClickMenu = document.getElementById('right-click-menu');
 const rightClickIcon = document.getElementById('right-click-icon-menu');
