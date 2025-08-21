@@ -83,13 +83,7 @@
             return `Bad command or file name: ${command}`;
         }
 
-        document.addEventListener('keydown', function(event) {
-            // Prevent the user from moving the cursor to previous lines
-            if (terminal.selectionStart < terminal.value.length) {
-                event.preventDefault();
-                terminal.selectionStart = terminal.value.length;
-                terminal.selectionEnd = terminal.value.length;
-            }
+        document.addEventListener('keydown', function(event) {           
             
             if (event.key === 'Enter') {
                 event.preventDefault(); // Prevent the default newline behavior

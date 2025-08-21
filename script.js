@@ -406,6 +406,7 @@ const refreshButton = document.getElementById('refresh');
 const sortBy = document.getElementById('sort-by');
 
 const logOff = document.getElementById('logoff');
+const run = document.getElementById('run');
 
 const windowContainer = document.querySelectorAll('.window');
 const taskBar = document.getElementById('taskbar');
@@ -437,6 +438,13 @@ shutdownButton.addEventListener('click', () => {
         window.close();
     }
 });
+
+run.addEventListener('click', () => {
+    const newWindow = createWindowElement('MS-DOS', 'assets/console.png');
+    document.body.appendChild(newWindow);
+    openWindows.push(iconName);
+    console.log(openWindows);
+})
 
 document.addEventListener('click', (event) => {
     
