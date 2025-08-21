@@ -142,14 +142,15 @@ function createWindowElement(title, imgAddress) {
     const windowDiv = document.createElement('div');
     windowDiv.classList.add('window', 'active');
     windowDiv.setAttribute('tabindex', '0');
+    // Redefine this when you want custom sized windows
     var windowWidth = 600;
-    var windowHeight = 400;
+    var windowHeight = 500;
     var noOfWindowOpens = openWindows.length;
     if(isTouchDevice) {
         windowDiv.style.width = '50%';
         windowDiv.style.height = '50%';
     } else {
-        // Redefine this when you want custom sized windows
+        
         windowDiv.style.width = windowWidth + 'px';
         windowDiv.style.height = windowHeight + 'px';
     }
@@ -192,20 +193,21 @@ function createWindowElement(title, imgAddress) {
 
     const minimizeButton = document.createElement('button');
     minimizeButton.textContent = '-';
-    // minimizeButton.innerHTML = '<b>_</b>';
-    minimizeButton.innerHTML = '<i class="fa fa-lg side fa-minus" style="margin-top: 7px"></i>';
+    minimizeButton.innerHTML = '<b>_</b>';
+    // minimizeButton.innerHTML = '<i class="fa fa-lg side fa-minus" style="margin-top: 7px"></i>';
     minimizeButton.style.fontFamily = 'WindowsFont, sans-serif';
     minimizeButton.id  = 'minimize-button';
 
     const maximizeButton = document.createElement('button');
-    // maximizeButton.textContent = '🗖';
-    maximizeButton.innerHTML = '<i class="fa fa-window-maximize"></i>';
+    maximizeButton.innerHTML = '<b>🗖</b>';
+    // maximizeButton.innerHTML = '<i class="fa fa-window-maximize"></i>';
     maximizeButton.style.fontFamily = 'WindowsFont, sans-serif';
+    maximizeButton.style.lineHeight = 1;
     maximizeButton.id  = 'maximize-button';
 
     const closeButton = document.createElement('button');
-    // closeButton.textContent = 'X';
-    closeButton.innerHTML = '<i class="fa fa-lg fa-times"></i>';
+    closeButton.innerHTML = '<b>X</b>';
+    // closeButton.innerHTML = '<i class="fa fa-lg fa-times"></i>';
     closeButton.style.fontFamily = 'WindowsFont, sans-serif';
     closeButton.id = 'close-button';
 

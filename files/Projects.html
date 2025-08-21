@@ -41,9 +41,45 @@
       text-align: center;
     }
 
-    .project img {
-      content: url('assets/msexplorer.png');
+    .github-promo {
+      margin-top: 30px;
+      text-align: center;
+      font-family: Arial, sans-serif;
     }
+
+    .github-promo p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .github-link {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff; /* white text */
+      background-color: #24292f; /* GitHub dark background */
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .github-link img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 8px;
+    }
+
+    .github-link span {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .github-link:hover {
+      background-color: #3c4148;
+    }
+
     
     .container {
       width: 90%;
@@ -55,49 +91,58 @@
 </head>
 <body>
   <div class="container">
-    <h1>My GitHub Projects</h1>
+    <h1>Some of my GitHub Projects:</h1>
     <div id="projects">
       <a class="project" href="https://github.com/Abdullah-hmed/Morphosis" 
       title="Morphosis is a web application designed for performing edits to faces, utilizing StyleGAN2 and Pixel2Style2Pixel" target="_blank">
-        <img alt="Github Logo">
+        <img src="assets/project_icons/morphosis.webp" alt="Project Logo">
         <p>Morphosis</p>
       </a>
       <a class="project" href="https://github.com/Abdullah-hmed/MNIST-CNN-Model"
       title="Trained a model for identifying handwritten letters using the MNIST dataset." target="_blank">
-        <img alt="Github Logo">
+        <img src="assets/project_icons/mnist.webp" alt="Project Logo">
         <p>MNIST-CNN-Model</p>
       </a>
       <a class="project" href="https://github.com/Abdullah-hmed/SL-WebApp-Main"
       title="WebApp for Sign Language Alphabet Recognition" target="_blank">
-        <img alt="Github Logo">
+        <img src="assets/project_icons/signlingo.webp" alt="Project Logo">
         <p>SL-WebApp-Main</p>
       </a>
       <a class="project" href="https://github.com/Abdullah-hmed/youtube-clone"
       title="An attempt at making a Youtube homepage clone using HTML, CSS, JS and PHP" target="_blank">
-        <img alt="Github Logo">
+        <img src="assets/project_icons/yt.webp" alt="Project Logo">
         <p>youtube-clone</p>
       </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/BookStore-Management-System"
-      title="A Book Store Management System built in Java" target="_blank">
-        <img alt="Github Logo">
-        <p>BookStore-Management-System</p>
+      <a class="project" href="https://github.com/Abdullah-hmed/terminal-media-viewer"
+      title="A Tool to display images and videos in the terminal" target="_blank">
+        <img src="assets/project_icons/term.webp" alt="Project Logo">
+        <p>terminal-media-viewer</p>
       </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/Bank-Application"
-      title="Bank Application made in java." target="_blank">
-        <img alt="Github Logo">
-        <p>Bank-Application</p>
+      <a class="project" href="https://github.com/Abdullah-hmed/faceswap"
+      title="A command line tool to perform face swaps on images and videos." target="_blank">
+        <img src="assets/project_icons/faceswap.webp" alt="Project Logo">
+        <p>faceswap</p>
       </a>
       <a class="project" href="https://github.com/Abdullah-hmed/Frequency-Analysis"
       title="Tool written in java to calculate frequency of letters in a given cipher." target="_blank">
-        <img alt="Github Logo">
+        <img src="assets/project_icons/freq.webp" alt="Project Logo">
         <p>Frequency-Analysis</p>
       </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/Phone-Directory"
-      title="A phone directory made in Java." target="_blank">
-        <img alt="Github Logo">
-        <p>Phone-Directory</p>
+      <a class="project" href="https://github.com/Abdullah-hmed/sl-word-level-transformer"
+      title="A Word-level Sign Language Classifier using Transformers" target="_blank">
+        <img src="assets/project_icons/sl-word.webp" alt="Project Logo">
+        <p>sl-word-level-transformer</p>
       </a>
     </div>
+    <div class="github-promo">
+      <p>Visit my GitHub for more:</p>
+      <a href="https://github.com/Abdullah-hmed/" title="My GitHub :D" target="_blank" class="github-link">
+        <img src="assets/github-mark-white.png" alt="GitHub Logo">
+        <span>GitHub</span>
+      </a>
+    </div>
+
+    
   </div>
 </body>
 </html>
