@@ -137,6 +137,14 @@ function toggleRightClickMenu(rightClickMenu, posX, posY) {
     rightClickMenu.style.top = `${posY}px`;
 }
 
+function setWindowBgColor(windowContent, title) {
+    if (title != "MS-DOS") {
+        windowContent.style.backgroundColor  = ' #a1a1a1';
+    } else {
+        windowContent.style.backgroundColor  = ' #000000';
+    }
+}
+
 function createWindowElement(title, imgAddress) {
     // Create main window div
     const windowDiv = document.createElement('div');
@@ -192,22 +200,21 @@ function createWindowElement(title, imgAddress) {
     topBarRight.className = 'top-bar-right';
 
     const minimizeButton = document.createElement('button');
-    minimizeButton.textContent = '-';
     minimizeButton.innerHTML = '<b>_</b>';
-    // minimizeButton.innerHTML = '<i class="fa fa-lg side fa-minus" style="margin-top: 7px"></i>';
+    minimizeButton.style.fontWeight = 'bold'
     minimizeButton.style.fontFamily = 'WindowsFont, sans-serif';
     minimizeButton.id  = 'minimize-button';
 
     const maximizeButton = document.createElement('button');
     maximizeButton.innerHTML = '<b>🗖</b>';
-    // maximizeButton.innerHTML = '<i class="fa fa-window-maximize"></i>';
+    maximizeButton.style.fontWeight = 'bold';
     maximizeButton.style.fontFamily = 'WindowsFont, sans-serif';
     maximizeButton.style.lineHeight = 1;
     maximizeButton.id  = 'maximize-button';
 
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '<b>X</b>';
-    // closeButton.innerHTML = '<i class="fa fa-lg fa-times"></i>';
+    closeButton.style.fontWeight = 'bold';
     closeButton.style.fontFamily = 'WindowsFont, sans-serif';
     closeButton.id = 'close-button';
 
@@ -270,12 +277,23 @@ function createWindowElement(title, imgAddress) {
     })
 
     closeButton.addEventListener('click', ()=> {
+        // Clean up scripts associated with this window
+        if (windowScripts.has(title)) {
+            windowScripts.get(title).forEach(script => {
+                if (script.parentNode) {
+                    script.parentNode.removeChild(script);
+                }
+            });
+            windowScripts.delete(title);
+        }
         windowDiv.remove();
         taskbarButton.remove();
         removeWindowFromList(title);
         console.log(openWindows);
-    })
+    });
+
     onFocusWindow(windowDiv, taskbarButton);
+    setWindowBgColor(windowDiv, title);
     dragWindow(windowDiv);
     loadContent(windowDiv, `files/${title}.html`);
     return windowDiv;
@@ -310,22 +328,71 @@ function onFocusWindow(windowDiv, taskbarButton) {
     });
 }
 
+const windowScripts = new Map(); // Maps window titles to their script elements
+
 async function loadContent(windowDiv, fileName) {
     try {
         const response = await fetch(fileName);
-        
-        if(!response.ok){
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
 
         const content = await response.text();
-        windowDiv.querySelector('#window-content').innerHTML = content;
+
+        const container = windowDiv.querySelector('#window-content');
+        container.innerHTML = content;
+
+        // Get window title for tracking
+        const windowTitle = windowDiv.querySelector('.top-bar-left p').textContent;
+        
+        // Clean up any existing scripts for this window
+        if (windowScripts.has(windowTitle)) {
+            windowScripts.get(windowTitle).forEach(script => {
+                if (script.parentNode) {
+                    script.parentNode.removeChild(script);
+                }
+            });
+        }
+
+        // Execute scripts and track them
+        const scripts = container.querySelectorAll('script');
+        const addedScripts = [];
+        
+        scripts.forEach(oldScript => {
+            if (oldScript.src) {
+                // For external scripts, check if already loaded globally
+                const scriptId = oldScript.src;
+                if (!document.querySelector(`script[src="${scriptId}"]`)) {
+                    const newScript = document.createElement('script');
+                    newScript.src = oldScript.src;
+                    newScript.setAttribute('data-window', windowTitle);
+                    document.head.appendChild(newScript);
+                    addedScripts.push(newScript);
+                }
+            } else {
+                // For inline scripts, wrap in IIFE to avoid global variable conflicts
+                const newScript = document.createElement('script');
+                newScript.setAttribute('data-window', windowTitle);
+                // Wrap the script content in an IIFE to create isolated scope
+                newScript.textContent = `(function() { 
+                    try { 
+                        ${oldScript.textContent} 
+                    } catch(e) { 
+                        console.error('Script error in ${windowTitle}:', e); 
+                    } 
+                })();`;
+                document.head.appendChild(newScript);
+                addedScripts.push(newScript);
+            }
+        });
+        
+        // Store scripts for this window
+        windowScripts.set(windowTitle, addedScripts);
 
     } catch (error) {
-        throw new Error(error);
         windowDiv.querySelector('#window-content').innerHTML = `<p>Error: ${error.message}</p>`;
+        console.error(error);
     }
 }
+
 
 
 const startButton = document.getElementById('start-button');

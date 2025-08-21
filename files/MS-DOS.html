@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .background {
+        background-color: black;
+        color: lime;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #textarea {
+        background-color: transparent;
+        border: none;
+        width: 100%;
+        height: calc(100% - 40px); 
+        resize: none;               
+        color: white;
+    }
+
+    #textarea:focus {
+        outline: none;
+    }
+</style>
+<body>
+    <textarea name="terminal" id="textarea" cols="30" rows="30"></textarea>
+    <script>
+        const terminal = document.getElementById("textarea");
+        const prompt = 'C:\\DOS > ';
+        terminal.value += prompt;
+
+        // Focus the terminal on page load
+        window.onload = function() {
+            terminal.focus();
+            terminal.selectionStart = terminal.value.length;
+            terminal.selectionEnd = terminal.value.length;
+        };
+
+        
+        const commands = {
+            math: (args) => `${args}`,
+            help: () => `Available commands:
+            - help\t\t List all available commands
+            - ls\t\t\t List the files in the directory
+            - math\t\t Solve mathematical expressions
+            - clear\t\t Clear the console`,
+            ls: () => 'Projects \t MS-DOS \t Icon 3',
+            clear: () => { 
+                terminal.value = prompt; 
+                return null;
+            },
+        };
+
+        function runCommand(command) {
+            command = command.trim();
+
+            // Dynamic commands
+            if (command.startsWith('math ')) {
+                const math_expression = command.slice(4);
+                return `Output: ${eval(math_expression)}`;
+            }
+
+            // Static commands
+            if (commands[command]) {
+                return commands[command]();
+            }
+
+            // Empty input
+            if (command === '') return '';
+
+            // Unknown command
+            return `Bad command or file name: ${command}`;
+        }
+
+        document.addEventListener('keydown', function(event) {
+            // Prevent the user from moving the cursor to previous lines
+            if (terminal.selectionStart < terminal.value.length) {
+                event.preventDefault();
+                terminal.selectionStart = terminal.value.length;
+                terminal.selectionEnd = terminal.value.length;
+            }
+            
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent the default newline behavior
+
+                const lines = terminal.value.split('\n');
+                const lastLine = lines[lines.length - 1];
+                const command = lastLine.replace(prompt, '').trim().toLowerCase();
+
+                // let output = '';
+
+                let output = runCommand(command)
+                
+                if (output != null){
+                    // Append output and a new prompt to the terminal
+                    terminal.value += '\n' + output + '\n' + prompt;
+                }
+                
+                // Auto-scroll to the bottom
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

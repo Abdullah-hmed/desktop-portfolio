@@ -92,48 +92,7 @@
 <body>
   <div class="container">
     <h1>Some of my GitHub Projects:</h1>
-    <div id="projects">
-      <a class="project" href="https://github.com/Abdullah-hmed/Morphosis" 
-      title="Morphosis is a web application designed for performing edits to faces, utilizing StyleGAN2 and Pixel2Style2Pixel" target="_blank">
-        <img src="assets/project_icons/morphosis.webp" alt="Project Logo">
-        <p>Morphosis</p>
-      </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/MNIST-CNN-Model"
-      title="Trained a model for identifying handwritten letters using the MNIST dataset." target="_blank">
-        <img src="assets/project_icons/mnist.webp" alt="Project Logo">
-        <p>MNIST-CNN-Model</p>
-      </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/SL-WebApp-Main"
-      title="WebApp for Sign Language Alphabet Recognition" target="_blank">
-        <img src="assets/project_icons/signlingo.webp" alt="Project Logo">
-        <p>SL-WebApp-Main</p>
-      </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/youtube-clone"
-      title="An attempt at making a Youtube homepage clone using HTML, CSS, JS and PHP" target="_blank">
-        <img src="assets/project_icons/yt.webp" alt="Project Logo">
-        <p>youtube-clone</p>
-      </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/terminal-media-viewer"
-      title="A Tool to display images and videos in the terminal" target="_blank">
-        <img src="assets/project_icons/term.webp" alt="Project Logo">
-        <p>terminal-media-viewer</p>
-      </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/faceswap"
-      title="A command line tool to perform face swaps on images and videos." target="_blank">
-        <img src="assets/project_icons/faceswap.webp" alt="Project Logo">
-        <p>faceswap</p>
-      </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/Frequency-Analysis"
-      title="Tool written in java to calculate frequency of letters in a given cipher." target="_blank">
-        <img src="assets/project_icons/freq.webp" alt="Project Logo">
-        <p>Frequency-Analysis</p>
-      </a>
-      <a class="project" href="https://github.com/Abdullah-hmed/sl-word-level-transformer"
-      title="A Word-level Sign Language Classifier using Transformers" target="_blank">
-        <img src="assets/project_icons/sl-word.webp" alt="Project Logo">
-        <p>sl-word-level-transformer</p>
-      </a>
-    </div>
+    <div id="projects"></div>
     <div class="github-promo">
       <p>Visit my GitHub for more:</p>
       <a href="https://github.com/Abdullah-hmed/" title="My GitHub :D" target="_blank" class="github-link">
@@ -141,8 +100,80 @@
         <span>GitHub</span>
       </a>
     </div>
+    <script>
+      const projects = [
+        {
+          name: "faceswap",
+          href: "https://github.com/Abdullah-hmed/faceswap",
+          title: "A command line tool to perform face swaps on images and videos.",
+          img: "assets/project_icons/faceswap.webp"
+        },
+        {
+          name: "Morphosis",
+          href: "https://github.com/Abdullah-hmed/Morphosis",
+          title: "Morphosis is a web application designed for performing edits to faces, utilizing StyleGAN2 and Pixel2Style2Pixel",
+          img: "assets/project_icons/morphosis.webp"
+        },
+        {
+          name: "sl-word-level-transformer",
+          href: "https://github.com/Abdullah-hmed/sl-word-level-transformer",
+          title: "A Word-level Sign Language Classifier using Transformers",
+          img: "assets/project_icons/sl-word.webp"
+        },
+        {
+          name: "SL-WebApp-Main",
+          href: "https://github.com/Abdullah-hmed/SL-WebApp-Main",
+          title: "WebApp for Sign Language Alphabet Recognition",
+          img: "assets/project_icons/signlingo.webp"
+        },
+        {
+          name: "MNIST-CNN-Model",
+          href: "https://github.com/Abdullah-hmed/MNIST-CNN-Model",
+          title: "Trained a model for identifying handwritten letters using the MNIST dataset.",
+          img: "assets/project_icons/mnist.webp"
+        },
+        {
+          name: "youtube-clone",
+          href: "https://github.com/Abdullah-hmed/youtube-clone",
+          title: "An attempt at making a Youtube homepage clone using HTML, CSS, JS and PHP",
+          img: "assets/project_icons/yt.webp"
+        },
+        {
+          name: "terminal-media-viewer",
+          href: "https://github.com/Abdullah-hmed/terminal-media-viewer",
+          title: "A Tool to display images and videos in the terminal",
+          img: "assets/project_icons/term.webp"
+        },
+        {
+          name: "Frequency-Analysis",
+          href: "https://github.com/Abdullah-hmed/Frequency-Analysis",
+          title: "Tool written in java to calculate frequency of letters in a given cipher.",
+          img: "assets/project_icons/freq.webp"
+        }
+      ];
 
-    
+      const projectsContainer = document.getElementById('projects');
+
+      projects.forEach(project => {
+        const a = document.createElement('a');
+        a.className = 'project';
+        a.href = project.href;
+        a.target = '_blank';
+        a.title = project.title;
+
+        const img = document.createElement('img');
+        img.src = project.img;
+        img.alt = 'Project Logo';
+
+        const p = document.createElement('p');
+        p.textContent = project.name;
+
+        a.appendChild(img);
+        a.appendChild(p);
+
+        projectsContainer.appendChild(a);
+      });
+    </script>
   </div>
 </body>
 </html>
