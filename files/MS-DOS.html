@@ -83,8 +83,59 @@
             return `Bad command or file name: ${command}`;
         }
 
+        let commandStack = [];
+        let commandStackIdx = 0;
+
         document.addEventListener('keydown', function(event) {           
             
+            if (event.key === 'ArrowUp') {
+                event.preventDefault();
+
+                if (commandStack.length > 0 && commandStackIdx < commandStack.length) {
+                    commandStackIdx++; // move deeper into history
+                    console.log("ArrowUp idx:", commandStackIdx);
+
+                    const prevCommand = commandStack[commandStack.length - commandStackIdx];
+                    const lines = terminal.value.split('\n');
+                    lines[lines.length - 1] = prompt + prevCommand;
+
+                    terminal.value = lines.join('\n');
+                }
+            }
+
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+
+                if (commandStackIdx > 0) {
+                    commandStackIdx--; // move back toward recent
+                    console.log("ArrowDown idx:", commandStackIdx);
+
+                    const prevCommand = commandStackIdx === 0 ? "" : commandStack[commandStack.length - commandStackIdx];
+
+                    const lines = terminal.value.split('\n');
+                    lines[lines.length - 1] = prompt + prevCommand;
+
+                    terminal.value = lines.join('\n');
+                }
+            }
+
+
+            if (event.key === 'ArrowLeft' || event.key === 'Backspace' || event.key === 'Home') {
+                              
+                const cursorPosition = terminal.selectionStart;
+                const lines = terminal.value.split('\n');
+                const lastLineStart = terminal.value.lastIndexOf("\n") + 1;
+
+                const PROMPT_LENGTH = prompt.length + 1;
+
+                if (cursorPosition < lastLineStart + PROMPT_LENGTH) {
+                    event.preventDefault();
+
+                    terminal.selectionStart = terminal.selectionEnd = lastLineStart + PROMPT_LENGTH;
+                }
+
+            }
+
             if (event.key === 'Enter') {
                 event.preventDefault(); // Prevent the default newline behavior
 
@@ -92,17 +143,21 @@
                 const lastLine = lines[lines.length - 1];
                 const command = lastLine.replace(prompt, '').trim().toLowerCase();
 
-                // let output = '';
+                commandStack.push(command);
+                console.log(commandStack);
 
-                let output = runCommand(command)
+                let output = runCommand(command);
+                commandStackIdx = 0; // Resetting the commandStackIdx each time a command is run
                 
                 if (output != null){
                     // Append output and a new prompt to the terminal
                     terminal.value += '\n' + output + '\n' + prompt;
+
+                    // Auto-scroll to the bottom
+                    terminal.scrollTop = terminal.scrollHeight;
                 }
                 
-                // Auto-scroll to the bottom
-                terminal.scrollTop = terminal.scrollHeight;
+                
             }
         });
     </script>
