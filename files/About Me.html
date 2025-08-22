@@ -1,0 +1,43 @@
+<style>
+
+    .notepad:focus {
+        border: inset;
+        outline: none;
+    }
+
+    .notepad {
+        padding:10px 0 0 10px;
+        height: 100dvh;
+        resize: none;
+        border: inset;
+        background-color: white;
+    }
+</style>
+
+
+<div contenteditable="true" spellcheck="false" class="notepad">
+    <h2>About Me</h2>
+    <p>
+        Hi, I’m <b>Abdullah</b> 👋<br>
+        A Software Engineering student passionate about <b>Artificial Intelligence</b> and <b>Web Development</b>
+    </p>
+    <br>
+    <h3>Tech Stack</h3>
+    <p>Python · JavaScript · NodeJS · Flask · PyTorch · OpenCV · Docker · React · Tailwind</p>
+    <br>
+    <h3>Links</h3>
+    <p>
+        - <a contenteditable="false" href="https://github.com/Abdullah-hmed" target="_blank">GitHub</a><br>
+        - <a contenteditable="false" href="https://www.linkedin.com/in/abdullah-ahmed-se" target="_blank">LinkedIn</a><br>
+        - <a contenteditable="false" href="mailto:abdullahwyi@gmail.com" target="_blank">Email Me</a>
+    </p>
+</div>
+
+
+<script>
+    const notepad = document.querySelector('.notepad');
+    const windowEl = notepad.closest('#window-content');
+
+    windowEl.style.overflowY = 'hidden';
+
+</script>
