@@ -1,0 +1,1 @@
+A Windows 98 desktop recreation built with vanilla HTML, CSS, and JavaScript. Currently primarily serves as an interactive portfolio showcasing selected projects and links.
