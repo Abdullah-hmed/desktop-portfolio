@@ -1,0 +1,31 @@
+<style>
+
+    .notepad:focus {
+        border: inset;
+        outline: none;
+    }
+
+    .notepad {
+        padding:10px 0 0 10px;
+        height: 100dvh;
+        resize: none;
+        border: inset;
+        background-color: white;
+    }
+</style>
+
+
+<div contenteditable="true" spellcheck="false" class="notepad"></div>
+
+<script>
+const notepad = document.querySelector('.notepad');
+const windowEl = notepad.closest('#window-content');
+
+windowEl.style.overflowY = 'hidden';
+
+fetch('../assets/journal.html')
+    .then(res => res.text())
+    .then(html => {
+        notepad.innerHTML = html;
+    });
+</script>
