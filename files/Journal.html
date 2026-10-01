@@ -15,17 +15,10 @@
 </style>
 
 
-<div contenteditable="true" spellcheck="false" class="notepad"></div>
+<div contenteditable="true" spellcheck="false" class="notepad">
 
-<script>
-const notepad = document.querySelector('.notepad');
-const windowEl = notepad.closest('#window-content');
+Hi, welcome to a little space where I will infrequently write about things I've come across which are interesting, at least to me. <br><br>
 
-windowEl.style.overflowY = 'hidden';
+For now, All remains quiet on this front.
 
-fetch('../assets/journal.html')
-    .then(res => res.text())
-    .then(html => {
-        notepad.innerHTML = html;
-    });
-</script>
+</div>
